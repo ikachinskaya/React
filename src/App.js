@@ -1,4 +1,5 @@
 import React from "react";
+import Aloha from "./components/Aloha";
 import Image from "./components/Image";
 
 const srcImage =
@@ -7,7 +8,9 @@ const srcImage =
 function App() {
   return (
     <React.Fragment>
+      <Aloha name="World" isGreeting />
       <Image alt="Image" src={srcImage} />
+      <Aloha name="World" />
     </React.Fragment>
   );
 }
