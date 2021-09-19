@@ -1,0 +1,10 @@
+.clickerText {
+  color: red;
+  font-weight: bold;
+}
+.btn {
+  border-radius: 20px;
+  margin: 20px 0;
+  padding: 10px;
+  font-weight: bold;
+}
