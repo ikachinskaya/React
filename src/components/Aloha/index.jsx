@@ -24,17 +24,20 @@ class Aloha extends Component {
     // this.setState(newState);
   };
   render() {
-    const { name } = this.props;
+    const { user } = this.props;
     const { isGreeting } = this.state;
     return (
-      <div>
+      <section>
         <h1>
-          {isGreeting ? "Hello" : "Bye"}, {name}!
+          {isGreeting ? "Привет" : "Пока"}, {user.name} {user.surName}!
         </h1>
-        <button className="btn" onClick={this.switchState}>
-          Click to change state{" "}
-        </button>
-      </div>
+        {isGreeting ? (
+          <button className="btn" onClick={this.switchState}>
+            {" "}
+            Нажми, чтобы изменить состояние{" "}
+          </button>
+        ) : null}
+      </section>
     );
   }
 }

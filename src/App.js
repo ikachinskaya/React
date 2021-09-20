@@ -1,20 +1,66 @@
 import React from "react";
+import { Component } from "react/cjs/react.production.min";
 import Aloha from "./components/Aloha";
-import Image from "./components/Image";
-import Clicker from "./components/Clicker";
 
-const srcImage =
-  "https://image.freepik.com/free-photo/wide-angle-shot-of-a-single-tree-growing-under-a-clouded-sky-during-a-sunset-surrounded-by-grass_181624-22807.jpg";
+const userObj = [
+  {
+    id: 1,
+    name: "Первый",
+    surName: "User 1",
+  },
+  {
+    id: 2,
+    name: "Второй",
+    surName: "User 2",
+  },
+  {
+    id: 3,
+    name: "Третий",
+    surName: "User 3",
+  },
+  {
+    id: 4,
+    name: "Четвертый",
+    surName: "User 4",
+  },
+  {
+    id: 5,
+    name: "Пятый",
+    surName: "User 5",
+  },
+];
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isReverseSortOrder: false,
+      AlohaArray: userObj.map((user) => <Aloha key={user.id} user={user} />),
+    };
+  }
 
-function App() {
-  return (
-    <React.Fragment>
-      <Aloha name="World" isGreeting />
-      <Image alt="Image" src={srcImage} />
-      <Aloha name="World" />
-      <Clicker />
-    </React.Fragment>
-  );
+  sortArray = () => {
+    const { AlohaArray } = this.state;
+    const newAlohaArray = AlohaArray.slice();
+    newAlohaArray.reverse();
+    this.setState({
+      isReverseSortOrder: !this.state.isReverseSortOrder,
+      AlohaArray: newAlohaArray,
+    });
+  };
+
+  render() {
+    const { AlohaArray } = this.state;
+    return (
+      <React.Fragment>
+        <h1>
+          Сейчас порядок сортировки{" "}
+          {this.state.isReverseSortOrder ? "Обратный" : "Прямой"}
+        </h1>
+        <button onClick={this.sortArray}>Сменить порядок</button>
+        {AlohaArray}
+      </React.Fragment>
+    );
+  }
 }
 
 export default App;
