@@ -1,6 +1,6 @@
 import React from "react";
 import { Component } from "react/cjs/react.production.min";
-import Aloha from "./components/Aloha";
+import AlohaDashboard from "./components/AlohaDashboard";
 
 const userObj = [
   {
@@ -33,32 +33,28 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      users: userObj,
       isReverseSortOrder: false,
-      AlohaArray: userObj.map((user) => <Aloha key={user.id} user={user} />),
     };
   }
 
   sortArray = () => {
-    const { AlohaArray } = this.state;
-    const newAlohaArray = AlohaArray.slice();
-    newAlohaArray.reverse();
+    const { users } = this.state;
+    const newUsers = users.slice();
+    console.log("sort");
+    newUsers.reverse();
     this.setState({
       isReverseSortOrder: !this.state.isReverseSortOrder,
-      AlohaArray: newAlohaArray,
+      users: newUsers,
     });
   };
 
   render() {
-    const { AlohaArray } = this.state;
+    const { users } = this.state;
     return (
-      <React.Fragment>
-        <h1>
-          Сейчас порядок сортировки{" "}
-          {this.state.isReverseSortOrder ? "Обратный" : "Прямой"}
-        </h1>
-        <button onClick={this.sortArray}>Сменить порядок</button>
-        {AlohaArray}
-      </React.Fragment>
+      <>
+        <AlohaDashboard users={users} sortArray={this.sortArray} />;
+      </>
     );
   }
 }
