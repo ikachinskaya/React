@@ -24,19 +24,29 @@ class Aloha extends Component {
     // this.setState(newState);
   };
   render() {
-    const { user } = this.props;
+    const {
+      user: { id, name, surName, isSelected },
+      selectUser,
+    } = this.props;
     const { isGreeting } = this.state;
+    const fullName = `${name} ${surName}`.trim();
+    const styles = {
+      color: isSelected ? "green" : "black",
+      border: isSelected ? "2px solid black" : "2px solid transparent",
+    };
     return (
-      <section>
+      <section style={styles}>
         <h1>
-          {isGreeting ? "Привет" : "Пока"}, {user.name} {user.surName}!
+          {isGreeting ? "Привет" : "Пока"}, {fullName}!
         </h1>
         {isGreeting ? (
           <button className="btn" onClick={this.switchState}>
-            {" "}
-            Нажми, чтобы изменить состояние{" "}
+            Нажми, чтобы изменить состояние
           </button>
         ) : null}
+        <button className="btn" onClick={() => selectUser(id)}>
+          Выбрать
+        </button>
       </section>
     );
   }
