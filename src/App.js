@@ -1,6 +1,7 @@
 import { Component } from "react";
-import StopWatch from "./components/StopWatch";
+import styles from "./app.module.css" 
 import SignInForm from "./components/SignInForm";
+import StopWatch from "./components/StopWatch";
 
 class App extends Component {
   constructor(props) {
@@ -21,8 +22,9 @@ class App extends Component {
     const { isVisible } = this.state;
     return (
       <>
-        {isVisible && <StopWatch />}
-        <button onClick={this.toggleVisibility}>HIDE</button>
+       
+        <button className={styles.btn} onClick={this.toggleVisibility}>HIDE</button>
+         {isVisible && <StopWatch />}
         <SignInForm />
       </>
     );
