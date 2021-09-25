@@ -1,8 +1,9 @@
 import { Component } from "react";
-import styles from "./app.module.css" 
+import styles from "./app.module.css";
 import SignInForm from "./components/SignInForm";
 import StopWatch from "./components/StopWatch";
 import Image from "./components/Image";
+import Clicker from "./components/Clicker";
 
 class App extends Component {
   constructor(props) {
@@ -23,11 +24,13 @@ class App extends Component {
     const { isVisible } = this.state;
     return (
       <>
-       
-        <button className={styles.btn} onClick={this.toggleVisibility}>HIDE</button>
-         {isVisible && <StopWatch />}
+        <button className={styles.btn} onClick={this.toggleVisibility}>
+          HIDE
+        </button>
+        {isVisible && <StopWatch />}
         <SignInForm />
-        <Image src="https://krasivosti.pro/uploads/posts/2021-04/1617723761_25-p-sobaka-oboi-labrador-korotkosherstnii-32.jpg"/>
+        <Image src="https://krasivosti.pro/uploads/posts/2021-04/1617723761_25-p-sobaka-oboi-labrador-korotkosherstnii-32.jpg" />
+        <Clicker />
       </>
     );
   }

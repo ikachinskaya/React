@@ -1,6 +1,6 @@
 import { Component } from "react";
 import Image from "./../Image";
-import "./clicker.css";
+import styles from "./clicker.module.css";
 
 class Clicker extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class Clicker extends Component {
   render() {
     let { counterClicker } = this.state;
     let button = (
-      <button className="btn" onClick={this.clickButton}>
+      <button className={styles.btn} onClick={this.clickButton}>
         Click me
       </button>
     );
@@ -26,7 +26,9 @@ class Clicker extends Component {
       <div>
         {counterClicker < 10 ? button : img}
 
-        <div className="clickerText">Pressed {counterClicker} times </div>
+        <div className={styles.clickerText}>
+          Pressed {counterClicker} times{" "}
+        </div>
       </div>
     );
   }
