@@ -1,0 +1,12 @@
+.imgWrapper {
+  width: 450px;
+  height: 300px;
+  margin: 20px auto;
+}
+
+.image {
+  width: inherit;
+  height: inherit;
+  object-fit: cover;
+  object-position: center;
+}
