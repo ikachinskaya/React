@@ -12,3 +12,9 @@
 .container > * {
   margin-bottom: 10px;
 }
+.correctInput {
+  border: 5px solid blue;
+}
+.inCorrectInput {
+  border: 5px solid red;
+}

@@ -7,6 +7,8 @@ class SignInForm extends Component {
     this.state = {
       login: "",
       password: "",
+      isLoginCorrect: true,
+      isPasswordCorrect: true,
     };
   }
 
@@ -37,22 +39,50 @@ class SignInForm extends Component {
     } = e;
     this.setState({
       [name]: value,
+      [`is${name[0].toUpperCase()}${name.slice(1)}Correct`]:
+        !value.includes(" "),
     });
   };
 
+  componentDidUpdate() {
+    cx({ [styles.container]: true, test2: false, good: true });
+  }
   render() {
-    const { login, password } = this.state;
+    const { login, password, isLoginCorrect, isPasswordCorrect } = this.state;
+
+    // const loginClassesNames = isLoginCorrect
+    //   ? styles.correctInput
+    //   : styles.inCorrectInput;
+
+    // const passwordClassesNames = isPasswordCorrect
+    //   ? styles.correctInput
+    //   : styles.inCorrectInput;
+
+    const loginClassesNames = cx({
+      [styles.correctInput]: isLoginCorrect,
+      [styles.inCorrectInput]: !isLoginCorrect,
+      container: true,
+      testClass: true,
+      badClass: false,
+    });
+    const passwordClassesNames = cx({
+      [styles.correctInput]: isPasswordCorrect,
+      [styles.inCorrectInput]: !isPasswordCorrect,
+    });
+
     return (
       <form className={styles.container} onSubmit={this.handleFormSubmit}>
         <input
-          onChange={this.handleLoginChange}
+          className={loginClassesNames}
+          onChange={this.handleChange}
           value={login}
           name="login"
           type="text"
           placeholder="login"
         />
         <input
-          onChange={this.handlePasswordChange}
+          className={passwordClassesNames}
+          onChange={this.handleChange}
           value={password}
           name="password"
           type="password"
@@ -65,3 +95,18 @@ class SignInForm extends Component {
 }
 
 export default SignInForm;
+
+function cx(stylesObj) {
+  // const classTuples = Object.entries(stylesObj);
+  // const filteredClassTuples = classTuples.filter(
+  //   ([className, boolValue]) => boolValue
+  // );
+  // const classNamesArray = filteredClassTuples.map(([className]) => className);
+  // let classNameString = classNamesArray.join(" ");
+  // return classNameString;
+
+  return Object.entries(stylesObj)
+    .filter(([className, boolValue]) => boolValue)
+    .map(([className]) => className)
+    .join(" ");
+}
