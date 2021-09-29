@@ -26,7 +26,7 @@ class Aloha extends Component {
   };
   render() {
     const {
-      user: { id, name, surName, isSelected },
+      user: { id, name, surName, isSelected, important },
       selectUser,
     } = this.props;
     const { isGreeting } = this.state;
@@ -38,7 +38,7 @@ class Aloha extends Component {
     return (
       <section style={styles}>
         <h1>
-          {isGreeting ? "Привет" : "Пока"}, {fullName}!
+          {isGreeting ? "Привет" : "Пока"}, {fullName} {important}! 
         </h1>
         {isGreeting ? (
           <button className="btn" onClick={this.switchState}>
@@ -58,9 +58,23 @@ export const userObj = {
   name: PropTypes.string.isRequired,
   surName: PropTypes.string.isRequired,
   isSelected: PropTypes.bool.isRequired,
+  important: PropTypes.string.isRequired,
 };
+
+Aloha.defaultProps = {
+  selectUser: () => {},
+  user: {
+    id: 500,
+    name: "чувак, ",
+    surName: "не забудь добавить пропсы!",
+    isSelected: false,
+    important: "Обязательно",
+  },
+};
+
 Aloha.propTypes = {
   selectUser: PropTypes.func.isRequired,
   user: PropTypes.shape(userObj).isRequired,
 };
+
 export default Aloha;
