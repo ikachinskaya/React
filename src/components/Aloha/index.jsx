@@ -1,5 +1,6 @@
 import { Component } from "react";
 import "./aloha.css";
+import PropTypes from "prop-types";
 
 class Aloha extends Component {
   constructor(props) {
@@ -51,4 +52,15 @@ class Aloha extends Component {
     );
   }
 }
+
+export const userObj = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  surName: PropTypes.string.isRequired,
+  isSelected: PropTypes.bool.isRequired,
+};
+Aloha.propTypes = {
+  selectUser: PropTypes.func.isRequired,
+  user: PropTypes.shape(userObj).isRequired,
+};
 export default Aloha;

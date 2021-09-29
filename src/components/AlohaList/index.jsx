@@ -1,5 +1,6 @@
 import { Component } from "react";
-import Aloha from "../Aloha";
+import Aloha, { userObj } from "../Aloha";
+import PropTypes from "prop-types";
 
 class AlohaList extends Component {
   render() {
@@ -15,4 +16,8 @@ class AlohaList extends Component {
   }
 }
 
+AlohaList.propTypes = {
+  selectUser: PropTypes.func,
+  users: PropTypes.arrayOf(PropTypes.shape(userObj)),
+};
 export default AlohaList;

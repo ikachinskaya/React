@@ -4,6 +4,7 @@ import SignInForm from "./components/SignInForm";
 import StopWatch from "./components/StopWatch";
 import Image from "./components/Image";
 import Clicker from "./components/Clicker";
+import AlohaDashboard from "./components/AlohaDashboard/";
 
 class App extends Component {
   constructor(props) {
@@ -31,6 +32,7 @@ class App extends Component {
         <SignInForm />
         <Image src="https://krasivosti.pro/uploads/posts/2021-04/1617723761_25-p-sobaka-oboi-labrador-korotkosherstnii-32.jpg" />
         <Clicker />
+        <AlohaDashboard />
       </>
     );
   }
