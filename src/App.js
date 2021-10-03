@@ -1,12 +1,9 @@
 import { Component } from "react";
-import styles from "./app.module.css";
-import SignInForm from "./components/SignInForm";
-import StopWatch from "./components/StopWatch";
-import Image from "./components/Image";
-import Clicker from "./components/Clicker";
-import AlohaDashboard from "./components/AlohaDashboard/";
-import Aloha from "./components/Aloha";
-
+import List from "./components/List";
+import Grid from "./components/Grid/";
+import Row from "./components/Grid/Row";
+import Col from "./components/Grid/Col";
+import FlexContainer from "./components/FlexContainer/";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -23,18 +20,37 @@ class App extends Component {
   };
 
   render() {
-    const { isVisible } = this.state;
     return (
       <>
-        <button className={styles.btn} onClick={this.toggleVisibility}>
-          HIDE
-        </button>
-        {isVisible && <StopWatch />}
-        <SignInForm />
-        <Image src="https://krasivosti.pro/uploads/posts/2021-04/1617723761_25-p-sobaka-oboi-labrador-korotkosherstnii-32.jpg" />
-        <Clicker />
-        <AlohaDashboard />
-        <Aloha />
+        <List>
+          <li>1</li>
+          <li>2</li>
+          <li>3</li>
+          <li>4</li>
+          <li>5</li>
+        </List>
+
+        <Grid>
+          <Row>
+            <Col>1</Col>
+            <Col>2</Col>
+            <Col>3</Col>
+            <Col>4</Col>
+          </Row>
+        </Grid>
+
+        <FlexContainer
+          justifyContainer="center"
+          alignItems="flex-end"
+          column
+          reverse
+        >
+          <a href="#">1</a>
+          <a href="#">2</a>
+          <a href="#">3</a>
+          <a href="#">4</a>
+          <a href="#">5</a>
+        </FlexContainer>
       </>
     );
   }
