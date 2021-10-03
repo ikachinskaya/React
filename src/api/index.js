@@ -18,13 +18,14 @@ import queryString from "query-string";
 //   ).then((response) => response.json());
 // };
 
+import { userSettings } from "../configs";
 export const getUsers = (options = {}) => {
   const defaultOptions = {
-    page: 1,
-    results: 10,
-    seed: "fd2021-1",
-    format: "json",
-    inc: ["name", "login", "nat"],
+    page: userSettings.DEFAULT_PAGE,
+    results: userSettings.RESULTS,
+    seed: userSettings.API_KEY,
+    format: userSettings.FORMAT,
+    inc: userSettings.DEFAULT_USER_DATA,
   };
   const finalOptions = { ...defaultOptions, ...options };
   const query = queryString.stringify(finalOptions, { arrayFormat: "comma" });
