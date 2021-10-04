@@ -4,6 +4,7 @@ import Aloha from "./components/Aloha";
 import Clicker from "./components/Clicker";
 import SignInForm from "./components/SignInForm";
 import StopWatch from "./components/StopWatch";
+import MainPage from "./pages/MainPage";
 import "./index.css";
 
 class App extends Component {
@@ -31,7 +32,7 @@ class App extends Component {
         </nav>
 
         <Switch>
-          <Route exact path="/">
+          <Route exact path="/" component={MainPage}>
             <Home />
           </Route>
           <Route path="/about">
@@ -40,6 +41,7 @@ class App extends Component {
           <Route path="/contacts">
             <Contacts />
           </Route>
+          <Route path="*" component={NotFound}></Route>
         </Switch>
         <h1>My Projects</h1>
 
@@ -81,6 +83,10 @@ class App extends Component {
           <Route path="/components/StopWatch">
             <StopWatch />
           </Route>
+
+          <Route path="/" component={MainPage}>
+            <StopWatch />
+          </Route>
         </Switch>
       </BrowserRouter>
     );
@@ -90,6 +96,8 @@ class App extends Component {
 const Home = () => <div>Home</div>;
 const About = () => <div>About</div>;
 const Contacts = () => <div>Contacts</div>;
+
+const NotFound = () => <div>NOT FOUND</div>;
 
 export default App;
 
