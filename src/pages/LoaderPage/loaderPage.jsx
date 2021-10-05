@@ -55,12 +55,13 @@ class LoaderPage extends Component {
   render() {
     return (
       <div>
-        <DataProvider
-          loadData={this.getNotebooks}
-          render={this.renderNotebooks}
-        />
-        <DataProvider loadData={this.getUsers} render={this.renderUsers} />
-        <DataProvider loadData={this.getPicture} render={this.renderPicture} />
+        <DataProvider loadData={this.getNotebooks}>
+          {this.renderNotebooks}
+        </DataProvider>
+        <DataProvider loadData={this.getUsers}>{this.renderUsers}</DataProvider>
+        <DataProvider loadData={this.getPicture}>
+          {this.renderPicture}
+        </DataProvider>
       </div>
     );
   }

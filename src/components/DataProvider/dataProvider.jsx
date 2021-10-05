@@ -39,14 +39,13 @@ class DataProvider extends Component {
   }
 
   render() {
-    const { render } = this.props;
-    const layout = render(this.state);
-    return layout;
+    const { children } = this.props;
+    return children(this.state);
   }
 }
 
 DataProvider.propTypes = {
   loadData: PropTypes.func.isRequired,
-  render: PropTypes.func.isRequired,
+  children: PropTypes.func.isRequired,
 };
 export default DataProvider;
