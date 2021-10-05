@@ -1,13 +1,16 @@
 import { Component } from "react";
-import Tree from "./components/Tree/tree.jsx";
 import { UserContext } from "./contexts/index.js";
 import Header from "./components/Header/header.jsx";
 import Sidebar from "./components/Header/SideBar/sideBar.jsx";
+import { ThemeContext } from "./contexts/index.js";
+import CONSTANS from "./constans.js";
+const { THEMES } = CONSTANS;
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      theme: THEMES.DARK,
       user: {
         id: 1,
         fullName: "Test Testovich",
@@ -17,14 +20,21 @@ class App extends Component {
     };
   }
 
+  setTheme = (newTheme) => {
+    this.setState({
+      theme: newTheme,
+    });
+  };
+
   render() {
-    console.log(UserContext);
+    const { theme, user } = this.state;
     return (
-      <UserContext.Provider value={this.state.user}>
-        <Tree user={this.state.user} />
-        <Header user={this.state.user} />
-        <Sidebar />
-      </UserContext.Provider>
+      <ThemeContext.Provider value={[theme, this.setTheme]}>
+        <UserContext.Provider value={user}>
+          <Header user={user} />
+          <Sidebar />
+        </UserContext.Provider>
+      </ThemeContext.Provider>
     );
   }
 }

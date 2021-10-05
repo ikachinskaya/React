@@ -1,14 +1,38 @@
 import React from "react";
-import { UserContext } from "./../../contexts/index.js";
+import cx from "classnames";
+import { UserContext, ThemeContext } from "./../../contexts/index.js";
+import styles from "./header.module.scss";
+import CONSTANS from "../../constans.js";
+const { THEMES } = CONSTANS;
+
 const Header = () => {
-  const consumerFunc = (user) => {
+  const renderThemeContext = ([theme, setTheme]) => {
+    const headerClasses = cx(styles.container, {
+      [styles.darkTheme]: theme === THEMES.DARK,
+      [styles.lightTheme]: theme === THEMES.LIGHT,
+    });
+
     return (
-      <div>
-        <h2>Hello, {user.fullName}</h2>
-      </div>
+      <UserContext.Consumer>
+        {(user) => {
+          const otherTheme =
+            theme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT;
+          return (
+            <header className={headerClasses}>
+              <h1>Hello, {user.fullName}</h1>
+              <button
+                className={styles.btn}
+                onClick={() => setTheme(otherTheme)}
+              >
+                Switch theme
+              </button>
+            </header>
+          );
+        }}
+      </UserContext.Consumer>
     );
   };
-  return <UserContext.Consumer>{consumerFunc}</UserContext.Consumer>;
+  return <ThemeContext.Consumer>{renderThemeContext}</ThemeContext.Consumer>;
 };
 
 export default Header;
