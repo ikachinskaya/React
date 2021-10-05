@@ -1,4 +1,4 @@
-import { ThemeContext, UserContext } from "../contexts";
+import { ThemeContext, UserContext } from "../../contexts";
 
 export const withTheme = (Component) => {
   return function ComponentWithTheme(props) {
