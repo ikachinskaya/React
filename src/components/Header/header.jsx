@@ -33,7 +33,19 @@ const Header = (props) => {
     console.log("LOG создался");
   }, [logValue]);
 
-  const changeValue = ({ target: { value } }) => setValue(Number(value));
+  //зависит он target: { value } , т.е. снаружи не от чего не зависит
+  //зависит от того, что прийдет из него
+  //в массив завсимостей ничего писать не нужно
+  //пишем только то, что пришло снаружи
+  const changeValue = useCallback(
+    ({ target: { value } }) => setValue(Number(value)),
+    []
+  );
+
+  useEffect(() => {
+    console.log("changeValue создался");
+  }, [changeValue]);
+
   //=========================================================
   const sayHello = useCallback(() => {
     alert(`Hello, ${fullName}`);
@@ -44,11 +56,19 @@ const Header = (props) => {
   }, [sayHello]);
   //=========================================================
 
+  //setTheme в зависимости не нужно писать
+  const changeTheme = useCallback(() => setTheme(otherTheme), [otherTheme]);
+
+  useEffect(() => {
+    console.log("changeTheme создался");
+  }, [changeTheme]);
+
+  //=========================================================
   return (
     <header className={headerClasses}>
       <h1>Hello, {fullName}</h1>
       <img src={userImg} alt={fullName} />
-      <button className={styles.btn} onClick={() => setTheme(otherTheme)}>
+      <button className={styles.btn} onClick={changeTheme}>
         Switch theme
       </button>
       <button onClick={logValue}>LOG value</button>
