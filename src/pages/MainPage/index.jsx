@@ -1,13 +1,15 @@
 import React, { Component } from "react";
-import Clicker from "../../components/Clicker";
-
+import Header from "./../../components/Header/header.jsx";
+import StopWatch from "./../../components/StopWatchHooks/stopWatch.jsx";
 class MainPage extends Component {
   render() {
     return (
       <>
-        <header>header</header>
+        <header>
+          <Header />
+        </header>
         <main>
-          <Clicker />
+          <StopWatch />
         </main>
         <footer>footer</footer>
       </>
