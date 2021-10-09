@@ -1,7 +1,8 @@
-import UserLoader from "./components/UserLoaderHooks/userLoader.jsx";
+import useClicker from "hooks/useClicker.js";
 
 function App() {
-  return <UserLoader />;
+  const click = useClicker();
+  return <h1>{click}</h1>;
 }
 
 export default App;
