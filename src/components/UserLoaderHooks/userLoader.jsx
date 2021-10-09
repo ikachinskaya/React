@@ -1,18 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useData } from "hooks";
 
 const Userloader = () => {
-  const [users, setUsers] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    setIsLoading(true);
-    fetch("/users.json")
-      .then((res) => res.json())
-      .then((data) => setUsers(data))
-      .catch((error) => setError(error))
-      .finally(() => setIsLoading(false));
-  }, []);
+  const load = () => fetch("/users.json").then((res) => res.json());
+  const { data: users, error, isLoading } = useData(load);
 
   if (isLoading) {
     return <div>ISLOADING...</div>;
