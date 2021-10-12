@@ -1,71 +1,60 @@
 import React, { useState } from "react";
 import styles from "./SignInForm.module.scss";
+import { Formik, Field, Form, ErrorMessage } from "formik";
 import { SIGN_IN_SHEMA } from "utils/validationSchemas";
 
-const goodSubmit = {
-  email: "test@gmail.com",
-  password: "1Qe#0000",
-  remember: "remember",
-};
-
-const badSubmit = {
-  email: "12152",
-  password: "@",
-  remember: "remember",
+const initialState = {
+  email: "",
+  password: "",
 };
 
 const SignInForm = (props) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isRemembering, setIsRemembering] = useState(false);
+  //submitHandler - как форма должна обрабатываться (отправить данные на сервер и т.д.)
+  //всё, что должно происходить после нажатия кнопки login
 
-  const handleEmail = ({ target: { value } }) => {
-    setEmail(value);
+  //values - все значения, которые есть в форме
+  //formikBag - объект со вспомогательными функциями
+  const submitHandler = (values, formikBag) => {
+    console.log(values);
+    console.log(formikBag);
   };
-  const handlePassword = ({ target: { value } }) => {
-    setPassword(value);
-  };
-  const handleRemember = ({ target: { value } }) => {
-    setIsRemembering(!isRemembering);
-  };
-  // console.log(SIGN_IN_SHEMA.validateSync(goodSubmit));
-  // console.log(SIGN_IN_SHEMA.validateSync(badSubmit));
-
-  try {
-    console.log(SIGN_IN_SHEMA.isValidSync(goodSubmit));
-    console.log(SIGN_IN_SHEMA.isValidSync(badSubmit));
-  } catch (error) {
-    console.log(error);
-  }
   return (
-    <form className={styles.container}>
-      <input
-        name="email"
-        value={email}
-        onChange={handleEmail}
-        placeholder="Email"
-      />
-      <input
-        name="password"
-        value={password}
-        onChange={handlePassword}
-        placeholder="Password"
-      />
-      <label className={styles.remember}>
-        <input
-          className={styles.rememberCheckbox}
-          type="checkbox"
-          name="remember"
-          value={isRemembering ? "remember" : ""}
-          checked={isRemembering}
-          onChange={handleRemember}
-        />
-        <span> Запомнить меня</span>
-      </label>
-
-      <button>Login</button>
-    </form>
+    <Formik
+      initialValues={initialState}
+      validationSchema={SIGN_IN_SHEMA}
+      onSubmit={submitHandler}
+    >
+      {(formikProps) => {
+        console.log(formikProps);
+        return (
+          <Form className={styles.container}>
+            <Field name="email" placeholder="E-mail" />
+            <ErrorMessage
+              name="email"
+              children={(msg) => <div style={{ color: "red" }}>{msg}</div>}
+            />
+            <Field type="password" name="password" placeholder="Password" />
+            <ErrorMessage name="password" component="article" />
+            <button type="submit">Login</button>
+            <button type="reset">Reset</button>
+          </Form>
+        );
+      }}
+    </Formik>
   );
 };
 
 export default SignInForm;
+
+/*
+ {formikProps.errors.email ? (<div>{formikProps.errors.email}</div>) : null}
+ ===
+ {formikProps.errors.email && <div>{formikProps.errors.email}</div>}
+ вернет последнюю true, если оба true
+*/
+//==============================
+/*
+  {formikProps.errors.email && formikProps.touched.email && (<div>{formikProps.errors.email}</div>)}
+  ===
+  <ErrorMessage name='email'/>
+*/
