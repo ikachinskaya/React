@@ -1,0 +1,26 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Test"
+    },
+    {
+      "id": 2,
+      "name": "Null"
+    }
+  ],
+  "messages": [
+    {
+      "id": 1,
+      "body": "Hello",
+      "createdAt": "12.10.2021 16:22",
+      "userId": 2
+    },
+    {
+      "id": 2,
+      "body": "Hi",
+      "createdAt": "01.01.2021 00:01",
+      "userId": 1
+    }
+  ]
+}
