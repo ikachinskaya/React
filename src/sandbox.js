@@ -1,58 +1,47 @@
-/*
-  генератор - функция, которая может возвращать некоторый промежуточные результаты своей работы
+/* 
+Арность - количество аргументов функции 
+Каррирование - процесс уменьшения арности функции */
 
-  итераторы делали нам:
-  for .. of
-  rest, spread
-  деструктуризации
-*/
-
-function* generator() {
-  console.log(1);
-  yield 5;
-  console.log(2);
-  yield 10;
-  console.log(3);
-
-  return 50;
+function sum(a, b, c) {
+  return a + b + c;
 }
 
-const iterator = generator();
+console.log(`sum 1 2 3 `, sum(1, 2, 3));
 
-console.log("первый вызов next");
-console.log(iterator.next());
+function curriedSum(a) {
+  return function (b) {
+    return function (c) {
+      return a + b + c;
+    };
+  };
+}
 
-console.log("2 вызов next");
-console.log(iterator.next());
+const withFirstNumber = curriedSum(1);
+const withSecondNumber = withFirstNumber(2);
+console.log(`curried sum 1 2 3:`, withSecondNumber(3));
+console.log(`curried sum одним вызовом:`, curriedSum(1)(2)(3));
+//===================================
 
-console.log("3 вызов next");
-const result = iterator.next();
+function countPrice(price, amount, discount) {
+  return price * amount - price * amount * discount;
+}
+console.log(countPrice(100, 2, 0.1));
+
+function curriedPrice(price) {
+  return function (amount) {
+    return function (discount) {
+      return price * amount - price * amount * discount;
+    };
+  };
+}
+
+const curriedPriceArrow = (price) => (amount) => (discount) =>
+  price * amount - price * amount * discount;
+
+const withPrice100 = curriedPrice(100);
+const withAmount5AndPrice100 = withPrice100(5);
+const result = withAmount5AndPrice100(0.2);
+const result2 = withAmount5AndPrice100(0.98);
 
 console.log(result);
-
-/*
-  Функция, которая будет генерировать числа от 1 до бесконечности. Каждый вызов next увеличивает значение на 1
-*/
-
-function* generateNumbers(maxNumber) {
-  try {
-    let number = 0;
-
-    while (number < maxNumber) {
-      number++;
-      yield number;
-    }
-  } catch (error) {
-    console.log("Случилась ошибка:", error);
-  }
-}
-
-const iter = generateNumbers(100);
-
-for (let i = 0; i < 120; i++) {
-  if (i === 10) {
-    iter.return("бабах");
-  }
-
-  console.log(iter.next());
-}
+console.log(result2);
